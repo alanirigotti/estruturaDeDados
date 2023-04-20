@@ -9,6 +9,8 @@ public class PilhaVetor<T> {
     public PilhaVetor(int limite) {
         
         info = (T[]) new Object[limite];
+        this.limite = limite;
+        this.tamanho = 0;
 
     }
 
@@ -66,9 +68,15 @@ public class PilhaVetor<T> {
     }
 
     public void concatenar(PilhaVetor<T> p ) {
-      
-         for(int i = 0; i < p.tamanho; i++){
-            info = p[i];
-         }
-        }   
+        if(p.estaVazia()) {
+            throw new IllegalArgumentException("PilhaVaziaException");
+        }
+        if(this.limite == this.tamanho) {
+            throw new IllegalArgumentException("PilhaCheiaException");
+        }
+        for(int i = 0; i < p.tamanho; i++) {
+            this.info[this.tamanho] = p.info[i];
+            this.tamanho++;
+        }
+    } 
     }
